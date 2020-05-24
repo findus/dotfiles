@@ -1,0 +1,42 @@
+---  
+- name: disable dunst
+  systemd:
+    name: dunst
+    state: stopped
+    scope: user
+    enabled: no
+
+- name: create mako config dir
+  file:
+    path: ~/.config/mako/
+    state: directory
+
+- name: copy mako config
+  copy:
+    src: config
+    dest: ~/.config/mako/config
+
+- name: copy mako userscripts
+  copy:
+    src: "{{ item }}"
+    dest: ~/bin/
+    mode: u=rwx,g=-,o=-
+  with_fileglob:
+    - bin/*
+
+- name: create repos dir
+  file:
+    path: ~/repos/
+    state: directory
+
+- git:
+    repo: 'https://github.com/emersion/mako'
+    dest: ~/repos/mako
+    version: master
+
+- name: build dev version of mako
+  shell: meson build && ninja -C build
+  args: 
+    chdir: ~/repos/mako/
+
+

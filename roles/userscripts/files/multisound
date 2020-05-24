@@ -1,0 +1,1 @@
+pacmd load-module module-combine-sink sink_name=combined sink_properties=device.description=CombinedSink slaves=alsa_output.pci-0000_00_1b.0.analog-stereo,bluez_sink.04_52_C7_60_DA_EF.a2dp_sink

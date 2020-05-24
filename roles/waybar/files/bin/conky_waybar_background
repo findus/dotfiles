@@ -1,0 +1,2 @@
+#!/bin/bash
+conky -q -u 1 -c ~/.config/conky/.conkyrc_net | jq --unbuffered --compact-output | while read line; do echo $line > /tmp/testlog ; done

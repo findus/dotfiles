@@ -1,0 +1,19 @@
+---
+- name: copy mako config
+  template:
+    src: mpdasrc.j2
+    dest: ~/.mpdasrc
+
+- name: enable mpdas
+  systemd:
+    name: mpdas
+    enabled: yes
+    state: started
+    scope: user
+  
+- name: enable mpdris2
+  systemd:
+    name: mpDris2
+    enabled: yes
+    state: started
+    scope: user

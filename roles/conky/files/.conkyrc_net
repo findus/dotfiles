@@ -1,0 +1,58 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+# Update interval in seconds
+update_interval 0.5
+total_run_times 0
+override_utf8_locale yes
+mpd_host localhost
+mpd_port 6601
+override_utf8_locale yes
+# b72f62 was music icon
+# 7996a9 was vol and hdd
+# b492b6 was cpu/mem/clock
+TEXT
+[
+ { "text" : "wlp3s0  ${execi 10 bandwidth  | grep "today" | awk '{print $2 $3}'}" ,
+  "class"      : ${if_match ${downspeedf wlp3s0 }>1200}"red"
+	${else}\
+		${if_match ${downspeedf wlp3s0 }>700}"yellow"
+	${else}\
+		${if_match ${downspeedf wlp3s0 }>50}"green"
+	${else}"default"${endif}${endif}${endif} } ,
+ { "text" : "  ${execi 10 bandwidth  | grep "today" | awk '{print $5 $6}'}",
+       "class" :
+  ${if_match ${upspeedf wlp3s0 }>90}"red"
+	${else}\
+		${if_match ${upspeedf wlp3s0 }>45}"yellow"
+	${else}\
+		${if_match ${upspeedf wlp3s0 }>5}"green"
+	${else}"default"${endif}${endif}${endif} } ,
+	 
+	 { "text" : "${loadavg}" , "class" :
+  ${if_match ${cpu}>75}"red"
+	${else}\
+		${if_match ${cpu}>50}"yellow"
+	${else}\
+		${if_match ${cpu}>35}"green"
+	${else}"default"${endif}${endif}${endif} } 
+
+] 
+
+# Icon glyphs from Terminusicons2
+#icon_clock="Õ"                      # Clock icon
+#icon_cpu="Ï"                        # CPU icon
+#icon_mem="Þ"                        # MEM icon
+#icon_dl="Ð"                         # Download icon
+#icon_ul="Ñ"                         # Upload icon
+#icon_vol="Ô"                        # Volume icon
+#icon_hd="À"                         # HD / icon
+#icon_home="Æ"                       # HD /home icon
+#icon_mail="Ó"                       # Mail icon
+#icon_chat="Ò"                       # IRC/Chat icon
+#icon_music="Î"                      # Music icon
+#icon_prog="Â"                       # Window icon
+#icon_contact="Á"                    # Contact icon
+#icon_wsp="É"                        # Workspace icon

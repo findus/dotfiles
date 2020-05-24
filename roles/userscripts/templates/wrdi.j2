@@ -1,0 +1,11 @@
+#!/bin/bash
+export DISPLAY=:0
+DATE=$(date +"%Y.%m.%d")
+DHOME=/home/{{ ansible_user_id }}/diary/
+echo "Check if $DHOME$DATE exists.."
+if [ ! -f $DHOME$DATE ]; then
+	echo "No"
+	touch $DHOME$DATE;
+fi
+/usr/bin/notify-send "Tagebuch" "Alles bereit, los gehts!"
+"${EDITOR:-vi}" $DHOME$DATE

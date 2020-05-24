@@ -1,0 +1,11 @@
+#!/bin/bash
+getState() {
+  #statements
+  if [[ $(lsof -i -n | egrep '\<ssh\>' | grep "TCP \[::1\]:$1") ]]; then
+    return 0
+  else
+	return 1
+  fi
+}
+$(getState $1)
+echo $?

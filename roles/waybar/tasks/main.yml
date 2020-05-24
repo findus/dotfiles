@@ -1,0 +1,23 @@
+---
+- name: create config dir
+  file:
+    path: ~/.config/waybar/
+    state: directory
+
+- name: copy config file
+  template:
+    src: config.j2
+    dest: ~/.config/waybar/config
+
+- name: copy style.css
+  copy:
+    src: style.css
+    dest: ~/.config/waybar/style.css
+
+- name: copy waybar userscripts
+  copy:
+    src: "{{ item }}"
+    dest: ~/bin/
+    mode: u=rwx,g=-,o=-
+  with_fileglob:
+    - bin/*

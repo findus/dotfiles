@@ -1,0 +1,13 @@
+- name: copy all profile scripts
+  copy:
+    src: "{{ item }}"
+    dest: ~/
+  with_fileglob:
+    - ./*
+    - ./.*
+
+- name: copy all profile templates
+  template:
+    src: "{{ item.src }}"
+    dest: ~/{{ item.path | regex_replace('\.j2$', '') }}
+  with_filetree: templates/

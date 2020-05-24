@@ -1,0 +1,72 @@
+#!/bin/bash
+
+
+BENQ="BNQ802E"
+DELL="DELD065"
+
+MONS=(
+    $BENQ \
+    $DELL
+)
+
+HDMI_1=17
+HDMI_2=18
+DP=15
+MDP=16
+
+declare -A outputs
+outputs[$BENQ]="16"
+outputs[$DELL]="15"
+
+declare -A monitors
+
+setOutput() {
+    gdbus call \
+    --system \
+    --dest ddccontrol.DDCControl \
+    --object-path=/ddccontrol/DDCControl \
+    --method ddccontrol.DDCControl.SetControl \
+    "${monitors[$1]}" 0x60 "${outputs[$1]}"
+}
+
+getName() {
+    res=$(gdbus call \
+     --system \
+     --dest ddccontrol.DDCControl \
+     --object-path=/ddccontrol/DDCControl \
+     --method ddccontrol.DDCControl.OpenMonitor \
+     $1 \
+     | sed -n -E "s/\('([A-Z0-9]+)'.*/\1/p" 2>/dev/null)
+    if [ $? -ne 0 ];
+    then
+        return -1
+    fi
+    echo $res
+}
+
+devices=($(gdbus call \
+    --system \
+    --dest ddccontrol.DDCControl \
+    --object-path=/ddccontrol/DDCControl \
+    --method ddccontrol.DDCControl.RescanMonitors \
+| cut -f1 -d']' \
+| cut -f2 -d "[" \
+| sed -E "s/[,']//g"))
+
+echo ${devices[@]}
+
+for i in ${devices[@]}; do
+    NAME=$(getName "${i}")
+    if [ -n "$NAME" ];
+    then
+        monitors[$NAME]="$i"
+        #echo "ee: ${monitors[@]} || $NAME  || ${monitors[$NAME]}"
+    fi
+done
+
+for i in "${MONS[@]}"; do
+	setOutput "$i"
+done
+
+
+

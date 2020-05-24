@@ -1,0 +1,14 @@
+---
+- name: Create conky folder
+  file:
+    path: ~/.config/conky/
+    state: directory
+
+- name: copy all conky files
+  copy:
+    src: "{{ item }}"
+    dest: ~/.config/conky/
+    mode: u=rwx,g=-,o=-
+  with_fileglob:
+    - ./*
+    - ./.*

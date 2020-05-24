@@ -1,0 +1,14 @@
+- name: create repos dir
+  file:
+    path: ~/repos/
+    state: directory
+
+- git:
+    repo: 'https://github.com/findus/st'
+    dest: ~/repos/st
+    version: master
+
+- name: build custom version of st
+  shell: make install
+  args: 
+    chdir: ~/repos/st/

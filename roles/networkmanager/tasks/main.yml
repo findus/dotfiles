@@ -1,0 +1,22 @@
+---
+- name: create folder scructure for user scripts for network manager
+  file:
+    path: ~/.config/{{ item.path }}
+    state: directory
+    mode: u=rwx,g=-,o=-
+  with_filetree: files/
+  when: item.state == 'directory'
+
+- name: copy network manager user scripts
+  copy:
+    src: "{{ item.src }}"
+    dest: ~/.config/{{ item.path }}
+    mode: u=rwx,g=-,o=-
+  with_filetree: files/
+  when: item.state == 'file'
+
+- name: copy network manager user scripts
+  template:
+    src: "templates/sshtunnels.j2"
+    dest: ~/.config/networkmanager/dispatcher.d/sshtunnels
+    mode: u=rwx,g=-,o=-

@@ -1,0 +1,37 @@
+border-color=#bbbbbb
+text-color=#ffffff
+background-color=#22222244
+icons=false
+max-history=100
+layer=overlay
+
+[urgency=high]
+text-color=#ffffff
+background-color=#90000044
+
+[app-name="Music Player Daemon"]
+background-color=#54B55344
+text-color=#ffffff
+default-timeout=5000
+
+[app-name="Thunderbird"]
+background-color=#af750044
+text-color=#ffffff
+
+[app-name="Spotify"]
+background-color=#54B55344
+text-color=#ffffff
+default-timeout=5000
+
+[app-name="Telegram Desktop"]
+background-color=#19607f44
+text-color=#ffffff
+icons=true
+
+[app-name="hexchat"]
+background-color=#3ba86e44
+text-color=#ffffff
+
+[app-name="weechat"]
+background-color=#562d4544
+text-color=#ffffff

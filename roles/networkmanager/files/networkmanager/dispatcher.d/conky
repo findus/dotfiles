@@ -1,0 +1,4 @@
+#!/bin/bash
+sleep 5
+NIC=$( nmcli connection | head -n 2 | awk '{ print $NF }' | tail -n 1)
+cat ~/.config/conky/.conkyrc_net_template | sed  -E "s/NIC/$NIC/g" > ~/.config/conky/.conkyrc_net

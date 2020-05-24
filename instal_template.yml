@@ -1,0 +1,101 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  vars:
+    shell: /usr/bin/zsh
+    znc_config_port: 
+    synchting_config_port: 
+    ssh_url: 
+    upload_token: 
+    upload_url: 
+    git_user: 
+    git_mail: 
+    lfm_user: 
+    lfm_pass: 
+    syncserver_url: 
+    firefox_profile_name: 
+    firefox_version:
+    monitor_configs:
+      - outputs:
+        - disabled: 
+          device: 
+          scale: 
+          mode: 
+        exec:
+          - 
+      - outputs:
+        - disabled: 
+          device: 
+          scale: 
+          mode: 
+        - disabled: 
+          device:
+          position:
+        exec:
+          - 
+      - outputs:
+        - disabled: 
+          device: 
+          scale: 
+          mode: 
+        - disabled: 
+          device: 
+          position: 
+          scale: 
+          mode: 
+        - disabled: 
+          device:        
+        exec:
+          - 
+      - outputs:
+        - disabled: 
+          device:
+        exec:
+          -
+    sshtunnels:
+      - url:
+        portr:
+        portl:
+      - url: 
+        portr:
+        portl:
+      - url: 
+        portr:
+        portl:
+      - url: 
+        portr:
+        portl:
+      - url: 
+        portr:
+        portl:
+    
+  roles:
+    - role: user-services
+      tags: user-services
+    - role: sway
+      tags: sway
+    - role: gtk
+      tags: gtk
+    - role: mako
+      tags: mako
+    - role: mpv
+      tags: mpv
+    - role: profile
+      tags: profile
+    - role: userscripts
+      tags: userscripts
+    - role: waybar
+      tags: waybar
+    - role: weechat
+      tags: weechat
+    - role: conky
+      tags: conky
+    - role: kanshi
+      tags: kanshi
+    - role: firefox
+      tags: firefox
+    - role: st
+      tags: st
+    - role: networkmanager
+      tags: networkmanager

@@ -1,0 +1,10 @@
+---
+- name: create sway config dir
+  file:
+    path: ~/.config/sway/
+    state: directory
+
+- name: copy config files
+  copy:
+    src: config
+    dest: ~/.config/sway/config

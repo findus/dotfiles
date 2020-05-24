@@ -1,0 +1,3 @@
+#!/bin/bash
+mount | grep /mnt/findus | grep vfat > /dev/null
+echo $?

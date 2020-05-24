@@ -1,0 +1,2 @@
+#!/bin/bash
+vnstat | grep : | grep -v "disabled"| sed -E 's/\[disabled\]//g' | sed -E 's/[ :]//g' | tr "\n" "+" | sed 's/+$//' | xargs vnstat -i

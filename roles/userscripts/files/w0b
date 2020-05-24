@@ -1,0 +1,30 @@
+#!/bin/bash
+#ffmpeg -i "$1" -vaapi_device /dev/dri/renderD128 -c:v vp9_vaapi -vf 'format=nv12,hwupload' "$1.webm"
+
+#ffmpeg \
+#-hwaccel vaapi -vaapi_device /dev/dri/renderD* -i "$1" \
+#-vf 'format=nv12,hwupload' \
+#-c:v vp8_vaapi  \
+#-b:v 3M -minrate 1M -maxrate 4M -bufsize 2M \
+#-c:a libvorbis "$(basename "$1").webm"
+
+filename=$(basename "$1")
+echo $filename
+filename_without_suffix=${filename%.*}
+
+BITRATE=$2
+
+ffmpeg \
+	-vaapi_device /dev/dri/renderD128 \
+	-i "$1" \
+	-vf 'format=nv12,hwupload' \
+	-c:v vp9_vaapi \
+	-bf 4 \
+	-g 150 \
+	-b:v $BITRATE \
+	-rc_mode 0 \
+	-compression_level 1 \
+	"${filename_without_suffix}.webm"
+
+
+

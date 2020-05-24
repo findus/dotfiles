@@ -1,0 +1,6 @@
+#!/bin/sh
+for i in $1$2
+do
+	filename=$(basename $i)
+	ffmpeg -loglevel info -y -threads 1 -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i $i -vcodec h264_vaapi -vf format='nv12|vaapi,hwupload' -b:v 10M -quality 1-quality 1 ${filename%.*i}.mp4;
+done

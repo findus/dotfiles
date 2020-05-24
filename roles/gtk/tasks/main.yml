@@ -1,0 +1,10 @@
+---
+- name: create gtk config dir
+  file:
+    path: ~/.config/gtk-2.0/
+    state: directory
+    
+- name: Configure GTK2
+  copy:
+    src: gtkrc
+    dest: ~/.config/gtk-2.0/gtkrc

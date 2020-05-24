@@ -1,0 +1,10 @@
+!#/bin/bash
+
+ACTION=$(dunstify --action="default,Set Monitor Outputs" "Monitors detected" "Want to change Monitor Inputs?")
+
+case "$ACTION" in
+
+"default")
+    ~/bin/ddc
+    ;;
+esac

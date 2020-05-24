@@ -1,0 +1,6 @@
+---
+- name: copy weechat files
+  template:
+    src: "{{ item.src }}"
+    dest: ~/.weechat/{{ item.path }}
+  with_filetree: files/

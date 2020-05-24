@@ -1,0 +1,14 @@
+---
+- name: copy all userscripts
+  copy:
+    src: "{{ item.src }}"
+    dest: ~/bin/{{ item.path }}
+    mode: u=rwx,g=-,o=-
+  with_filetree: files/
+
+- name: copy all userscript templates
+  template:
+    src: "{{ item.src }}"
+    dest: ~/bin/{{ item.path | regex_replace('\.j2$', '') }}
+    mode: u=rwx,g=-,o=-
+  with_filetree: templates/

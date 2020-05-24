@@ -1,0 +1,10 @@
+---
+- name: create kanshi config dir
+  file:
+    path: ~/.config/kanshi/
+    state: directory
+
+- name: generate monitor entries
+  template:
+    src: "config.j2"
+    dest: ~/.config/kanshi/config

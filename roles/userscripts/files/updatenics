@@ -1,0 +1,18 @@
+#!/bin/bash 
+getLinkNames() {
+	ip link show | grep -v lo | egrep '^[0-9+]:' | awk ' { print substr($2, 1, 
+length($2)-1) }'
+}
+
+askUser() {
+	getLinkNames | $FINDUS_MENU -l 10 -i -p nics
+}
+
+
+
+LINKNAMES=$(getLinkNames)
+opt=$(askUser)
+               echo $opt
+                mkdir ~/.config/conky
+                sed -e "s/DEV_PLACEHOLDER/$opt/g" ~/templates/.conkyrc > ~/.config/conky/.conkyrc
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+pkill  ~/repos/mako/build/mako
+nohup ~/repos/mako/build/mako &
+echo "restart mpdris"
+systemctl --user restart mpDris2.service
+

@@ -1,0 +1,18 @@
+{% for cfg in monitor_configs %}
+
+{
+    {% for output in cfg.outputs %}
+        {% if output.disabled == 'enabled' %}
+    output {{ output.device }} {{ output.disabled }} {% if output.scale  %} scale {{ output.scale }} {% endif %} {% if output.position %} position {{ output.position }} {% endif %} {% if output.mode %} mode {{ output.mode }} {% endif %}
+        {% else %}
+    output {{ output.device }} disabled
+        {% endif %}
+    {% endfor %}
+
+    {% for exec in cfg %}
+        {{ exec }}
+    {% endfor %}
+
+}
+
+{% endfor %}

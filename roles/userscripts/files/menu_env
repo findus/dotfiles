@@ -1,0 +1,2 @@
+#!/bin/sh
+dmenu_path | $FINDUS_MENU "$@" | ${SHELL:-"/bin/sh"} &

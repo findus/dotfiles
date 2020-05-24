@@ -1,0 +1,22 @@
+#profile=opengl-hq 
+hwdec=vaapi
+hwdec-codecs=all
+#vo=gpu
+sub-file-paths=./Subs/
+ytdl-format='bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]' 
+sub-auto=fuzzy                          # external subs don't have to match the file name exactly to autoload
+sub-file-paths-append=ass               # search for external subs in these relative subdirectories
+sub-file-paths-append=srt
+sub-file-paths-append=sub
+sub-file-paths-append=subs
+sub-file-paths-append=subtitles
+
+slang=enm,en,eng,de,deu,ger             # automatically select these subtitles (decreasing priority)
+alang=ja,jp,jpn,en,eng,de,deu,ger # automatically select these audio tracks (decreasing priority)
+
+audio-channels=stereo
+
+af=lavfi="pan=stereo|FL < 0.5*FC + 0.3*FLC + 0.3*FL + 0.3*BL + 0.3*SL + 0.5*LFE | FR < 0.5*FC + 0.3*FRC + 0.3*FR + 0.3*BR + 0.3*SR + 0.5*LFE",lavfi="acompressor=10"
+
+cache=yes
+

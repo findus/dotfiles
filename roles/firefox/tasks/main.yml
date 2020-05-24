@@ -1,0 +1,32 @@
+---
+- name: copy firefox launch script
+  template:
+    src: ff.j2
+    dest: ~/bin/ff
+    mode: u=rwx,g=-,o=-
+
+- name: create profile
+  shell: "{{ firefox_version }} --headless -CreateProfile \"{{ firefox_profile_name }} /home/{{ ansible_user_id }}/.mozilla/firefox/{{ firefox_profile_name }}/\""
+
+- name: Create profile folder file for ff account
+  file:
+    path: "~/.mozilla/firefox/{{ firefox_profile_name }}/"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: '0700'
+    state: directory
+
+- name: Create user.prefs file for ff account
+  file:
+    path: "~/.mozilla/firefox/{{ firefox_profile_name }}/user.js"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: '0600'
+    state: touch
+
+- name: Ensure profile sync server is set to custom domain
+  lineinfile:
+    path: "~/.mozilla/firefox/{{ firefox_profile_name }}/user.js"
+    line: user_pref("identity.sync.tokenserver.uri", "{{ syncserver_url }}");
+    regexp: 'user_pref\("identity.sync.tokenserver.uri.*'
+    insertbefore: BOF
