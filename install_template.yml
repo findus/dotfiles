@@ -99,3 +99,5 @@
       tags: st
     - role: networkmanager
       tags: networkmanager
+    - role: vim
+      tags: vim

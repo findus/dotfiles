@@ -1,0 +1,3 @@
+---
+- name: "install vundle"
+  shell: "vim +BundleUpdate +qall > /dev/null"
