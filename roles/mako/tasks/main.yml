@@ -32,7 +32,7 @@
 - git:
     repo: 'https://github.com/emersion/mako'
     dest: ~/repos/mako
-    version: master
+    version: exec
 
 - name: build dev version of mako
   shell: meson build && ninja -C build

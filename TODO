@@ -2,3 +2,4 @@ Weechat irc.conf
 systemd crash user services for telegram, mako and kanshi
 disable network mount in thunar
 meson
+dunst dbus autoload org.knopwob.dunst.service

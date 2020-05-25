@@ -1,0 +1,13 @@
+#!/bin/bash
+
+declare -A mapping
+mapping["Telegram Desktop"]="telegramdesktop"
+mapping["Thunderbird"]="thunderbird"
+
+app_name=$(makoctl list | jq -re '.data[0][0]["app-name"].data')
+mapped="${mapping["$app_name"]}"
+echo $mapped
+if [ ! -z "$mapped" ];
+then
+    swaymsg \[app_id=\"$mapped\"\] urgent enable
+fi

@@ -4,6 +4,8 @@ background-color=#22222244
 icons=false
 max-history=100
 layer=overlay
+#on-notify=exec [ -n "$desktop_entry" ] && swaymsg [app_id="$desktop_entry"] urgent enable
+on-notify=exec ~/bin/mako_urgent 
 
 [urgency=high]
 text-color=#ffffff
