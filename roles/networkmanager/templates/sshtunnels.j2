@@ -17,7 +17,7 @@ AUTOSSH_LOGLEVEL=7
 AUTOSSH_POLL=30
 
 {% for tunnel in sshtunnels %}
-	AUTOSSH_POLL=30 autossh -f -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L {{ tunnel.portl }}:localhost:{{ tunnel.portr }} {{ tunnel.url }} &
+	AUTOSSH_POLL=30 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L {{ tunnel.portl }}:localhost:{{ tunnel.portr }} {{ tunnel.url }} &
 {% endfor %}
 
 #DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $(whoami))/bus" notify-send "SSH-Connections restarted"
