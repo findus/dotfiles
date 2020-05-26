@@ -18,5 +18,5 @@
 - name: copy network manager user scripts
   template:
     src: "templates/sshtunnels.j2"
-    dest: ~/.config/networkmanager/dispatcher.d/sshtunnels
+    dest: ~/.config/NetworkManager/dispatcher.d/sshtunnels
     mode: u=rwx,g=-,o=-
