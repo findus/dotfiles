@@ -4,6 +4,23 @@
     src: mpdasrc.j2
     dest: ~/.mpdasrc
 
+- name: create mpd folder
+  file:
+    path: ~/.config/mpd/
+    state: directory
+
+- name: Copy mpd config
+  copy:
+    src: mpd.conf
+    dest: ~/.config/mpd/mpd.conf
+
+- name: enable mpd
+  systemd:
+    name: mpd
+    enabled: yes
+    state: started
+    scope: user
+
 - name: enable mpdas
   systemd:
     name: mpdas
