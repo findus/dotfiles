@@ -5,13 +5,6 @@
 {% endfor %}
 sleep 2
 
-
-COUNT=$(ssh-add -l | wc -l)
-if [ "$COUNT" -eq 0 ];
-then
-	exit -1
-fi
-
 AUTOSSH_DEBUG=true
 AUTOSSH_LOGLEVEL=7
 AUTOSSH_POLL=30
