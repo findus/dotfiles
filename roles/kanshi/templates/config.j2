@@ -2,16 +2,20 @@
 
 {
     {% for output in cfg.outputs %}
-        {% if output.disabled == 'enabled' %}
-    output {{ output.device }} {{ output.disabled }} {% if output.scale  %} scale {{ output.scale }} {% endif %} {% if output.position %} position {{ output.position }} {% endif %} {% if output.mode %} mode {{ output.mode }} {% endif %}
+        {% if output.disabled == 'enable' %}
+            output "{{ output.device }}" {{ output.disabled }} {% if output.scale is defined  %} scale {{ output.scale }} {% endif %} {% if output.position is defined %} position {{ output.position }} {% endif %} {% if output.mode is defined %} mode {{ output.mode }} {% endif %}
+
         {% else %}
-    output {{ output.device }} disabled
+            output "{{ output.device }}" disable
+
         {% endif %}
     {% endfor %}
 
-    {% for exec in cfg %}
-        {{ exec }}
-    {% endfor %}
+    {% if cfg.exec is defined %}
+        {% for exec in cfg.exec %}
+            exec {{ exec }}
+        {% endfor %}
+    {% endif %}
 
 }
 
