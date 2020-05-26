@@ -278,7 +278,7 @@ exec swayidle -w before-sleep 'swaylock -f -c 000000'
 exec_always sh -c 'pkill mako; ~/repos/mako/build/mako'
 exec_always sh -c 'sleep 5; systemctl --user restart mpDris2'
 exec_always sh -c 'pkill kanshi; kanshi'
-exec waybar
+exec killall waybar && waybar
 exec udiskie
 exec conky_waybar_background
 exec gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
