@@ -253,6 +253,8 @@ assign [class="Hexchat"] $workspace7
 #make window float on startup
 for_window [class="Main.py" instance="guake"] floating enable
 for_window [class="java-lang-Thread"] floating enable
+for_window [title="win0"] floating enable
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 # enable floating mode and move container to workspace 4
 for_window [class="streamcheck"] floating enable
