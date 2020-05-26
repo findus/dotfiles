@@ -1,4 +1,9 @@
 ---
+- name: create weechat folder
+  file:
+    path: ~/.weechat/
+    state: directory
+
 - name: copy weechat files
   template:
     src: "{{ item.src }}"
