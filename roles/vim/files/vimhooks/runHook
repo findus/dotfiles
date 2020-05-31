@@ -1,0 +1,13 @@
+#!/bin/bash
+
+parentdir="$(basename $(dirname "$1"))"
+basename="$(basename "$1")"
+key="$parentdir/$basename"
+echo $key
+declare -A array
+array["mako/config"]="~/bin/mako"
+array["waybar/style.css"]="systemctl --user restart waybar"
+array["waybar/config"]="systemctl --user restart waybar"
+command=${array[$key]}
+echo $command
+$command

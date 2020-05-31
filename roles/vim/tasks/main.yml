@@ -1,3 +1,26 @@
 ---
 - name: "install vundle"
-  shell: "vim +BundleUpdate +qall > /dev/null"
+  shell: "nvim +BundleUpdate +qall > /dev/null"
+
+- name: create nvim config dir
+  file:
+    path: ~/.config/nvim/
+    state: directory
+
+- name: copy config files
+  copy:
+    src: init.vim
+    dest: ~/.config/nvim/init.vim
+  
+- name: create nvim hooks dir
+  file:
+    path: ~/.local/vimhooks/
+    state: directory
+
+- name: copy nvim hooks
+  copy:
+    src: "{{ item }}"
+    dest: ~/.local/vimhooks/
+    mode: u=rwx,g=-,o=-
+  with_fileglob:
+    - vimhooks/*
