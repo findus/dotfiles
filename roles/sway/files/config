@@ -264,8 +264,6 @@ gaps inner 8
 gaps outer 8
 for_window [class="^.*"] border pixel 4
 
-exec firefox-developer-edition
-exec thunderbird
 exec nm-applet
 exec blueman-manager
 exec syncthing-gtk
@@ -274,12 +272,15 @@ exec signal-desktop
 exec pasystray -a --include-monitors
 exec keepassxc
 exec st -c weechat -t weechat weechat
-exec swayidle -w before-sleep 'swaylock -f -c 000000'
+exec swayidle -w before-sleep 'swaylock -f -c 000000 && playerctl -a pause'
 exec_always sh -c 'pkill mako; ~/repos/mako/build/mako'
 exec_always sh -c 'sleep 5; systemctl --user restart mpDris2'
 exec_always sh -c 'pkill kanshi; kanshi'
-exec killall waybar && waybar
 exec udiskie
 exec conky_waybar_background
 exec gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 exec gsettings set org.gnome.desktop.interface gtk-theme "Nordic"
+exec_always systemctl --user import-environment
+exec systemctl --user restart waybar
+exec thunderbird
+exec firefox-developer-edition

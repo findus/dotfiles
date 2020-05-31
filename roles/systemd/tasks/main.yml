@@ -1,0 +1,21 @@
+---
+- name: create systemd user config dir
+  file:
+    path: ~/.config/systemd/
+    state: directory
+
+- name: create folder scructure for systemd user scripts
+  file:
+    path: ~/.config/{{ item.path }}
+    state: directory
+    mode: u=rwx,g=-,o=-
+  with_filetree: files/
+  when: item.state == 'directory'
+
+- name: copy files for systemd user scripts
+  copy:
+    src: "{{ item.src }}"
+    dest: ~/.config/{{ item.path }}
+    mode: u=rwx,g=-,o=-
+  with_filetree: files/
+  when: item.state == 'file'

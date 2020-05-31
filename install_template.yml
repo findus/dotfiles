@@ -101,3 +101,5 @@
       tags: networkmanager
     - role: vim
       tags: vim
+    - role: systemd
+      tags: systemd
