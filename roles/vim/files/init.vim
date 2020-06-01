@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
+set t_BE=0
+set ffs=unix,dos
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -33,6 +34,8 @@ set number relativenumber
 set showcmd
 let g:neocomplete#enable_at_startup = 1
 
+set clipboard=unnamed,unnamedplus
+
 let g:go_highlight_structs = 1 
 let g:go_highlight_methods = 1
 let g:go_highlight_functions = 1
@@ -62,3 +65,20 @@ au BufWritePost ~/.homesick/*/home/.config/* call RunSaveHook()
 au BufWritePost *.service silent! execute "!systemctl --user daemon-reload" | redraw!
 
 autocmd BufEnter * lcd %:p:h
+
+" Wayland clipboard provider that strips carriage returns (GTK3 issue).
+" This is needed because currently there's an issue where GTK3 applications on
+" Wayland contain carriage returns at the end of the lines (this is a root
+" issue that needs to be fixed).
+let g:clipboard = {
+      \   'name': 'wayland-strip-carriage',
+      \   'copy': {
+      \      '+': 'wl-copy --foreground --type text/plain',
+      \      '*': 'wl-copy --foreground --type text/plain --primary',
+      \    },
+      \   'paste': {
+      \      '+': {-> systemlist('wl-paste --no-newline | tr -d "\r"')},
+      \      '*': {-> systemlist('wl-paste --no-newline --primary | tr -d "\r"')},
+      \   },
+      \   'cache_enabled': 1,
+      \ }
